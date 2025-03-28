@@ -1,0 +1,220 @@
+{
+    "CS1428": {
+      "id": "CS1428",
+      "title": "Foundations of Computer Science I",
+      "code": "CS 1428",
+      "credits": 4,
+      "department": "Computer Science",
+      "prerequisites": [],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS2308": {
+      "id": "CS2308",
+      "title": "Foundations of Computer Science II",
+      "code": "CS 2308",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS1428"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS2315": {
+      "id": "CS2315",
+      "title": "Computer Ethics",
+      "code": "CS 2315",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS2318": {
+      "id": "CS2318",
+      "title": "Assembly Language",
+      "code": "CS 2318",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS2308"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS3354": {
+      "id": "CS3354",
+      "title": "Intro to Object-Oriented Design",
+      "code": "CS 3354",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS2308"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS3358": {
+      "id": "CS3358",
+      "title": "Data Structures",
+      "code": "CS 3358",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS2308"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS3398": {
+      "id": "CS3398",
+      "title": "Software Engineering",
+      "code": "CS 3398",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS3358"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS3339": {
+      "id": "CS3339",
+      "title": "Computer Architecture",
+      "code": "CS 3339",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS2318"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS3360": {
+      "id": "CS3360",
+      "title": "Computing Systems Fundamentals",
+      "code": "CS 3360",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS3339"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS4371": {
+      "id": "CS4371",
+      "title": "Computer Systems Security",
+      "code": "CS 4371",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS3360"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS4318": {
+      "id": "CS4318",
+      "title": "Compiler Construction",
+      "code": "CS 4318",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS3360"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS4326": {
+      "id": "CS4326",
+      "title": "Human Factors",
+      "code": "CS 4326",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS3398"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS4380": {
+      "id": "CS4380",
+      "title": "Parallel Programming",
+      "code": "CS 4380",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS3360"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "CS4398": {
+      "id": "CS4398",
+      "title": "Software Engineering Project",
+      "code": "CS 4398",
+      "credits": 3,
+      "department": "Computer Science",
+      "prerequisites": [
+        "CS3398"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "MATH2358": {
+      "id": "MATH2358",
+      "title": "Discrete Math I",
+      "code": "MATH 2358",
+      "credits": 3,
+      "department": "Mathematics",
+      "prerequisites": [],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "MATH3398": {
+      "id": "MATH3398",
+      "title": "Discrete Math II",
+      "code": "MATH 3398",
+      "credits": 3,
+      "department": "Mathematics",
+      "prerequisites": [
+        "MATH2358"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "MATH2471": {
+      "id": "MATH2471",
+      "title": "Calculus I",
+      "code": "MATH 2471",
+      "credits": 4,
+      "department": "Mathematics",
+      "prerequisites": [],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "MATH2472": {
+      "id": "MATH2472",
+      "title": "Calculus II",
+      "code": "MATH 2472",
+      "credits": 4,
+      "department": "Mathematics",
+      "prerequisites": [
+        "MATH2471"
+      ],
+      "description": "",
+      "gradeDistribution": {}
+    },
+    "MATH3305": {
+      "id": "MATH3305",
+      "title": "Probability & Statistics",
+      "code": "MATH 3305",
+      "credits": 3,
+      "department": "Mathematics",
+      "prerequisites": [],
+      "description": "",
+      "gradeDistribution": {}
+    }
+  }

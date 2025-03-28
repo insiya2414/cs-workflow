@@ -7,99 +7,33 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import csCourses from './data/cs_course_data.json';
+
 
 import { CourseNode } from './components/CourseNode';
 import { ProgressTracker } from './components/ProgressTracker';
 import { CourseDetails } from './components/CourseDetails';
 import { Download, ZoomIn, ZoomOut } from 'lucide-react';
 
-// CS Curriculum Data
-const csCourses = {
-  'CS1428': {
-    id: 'CS1428',
-    title: 'Foundations of Computer Science I',
-    code: 'CS 1428',
-    credits: 4,
-    department: 'Computer Science',
-    prerequisites: [],
-    description: 'Introduction to computer science including problem solving, algorithms, programming concepts, and data structures.',
-    gradeDistribution: { A: 35, B: 30, C: 20, D: 10, F: 5 }
+const initialNodes = Object.values(csCourses).map((course, index) => ({
+  id: course.id,
+  type: 'courseNode',
+  position: {
+    x: 200 + (index % 5) * 200,
+    y: 100 + Math.floor(index / 5) * 150
   },
-  'CS2308': {
-    id: 'CS2308',
-    title: 'Foundations of Computer Science II',
-    code: 'CS 2308',
-    credits: 3,
-    department: 'Computer Science',
-    prerequisites: ['CS1428'],
-    description: 'Advanced programming concepts including abstract data types, algorithmic efficiency, and software engineering principles.',
-    gradeDistribution: { A: 30, B: 35, C: 20, D: 10, F: 5 }
-  },
-  'CS2318': {
-    id: 'CS2318',
-    title: 'Assembly Language',
-    code: 'CS 2318',
-    credits: 3,
-    department: 'Computer Science',
-    prerequisites: ['CS2308'],
-    description: 'Computer organization and assembly language programming.',
-    gradeDistribution: { A: 25, B: 35, C: 25, D: 10, F: 5 }
-  },
-  'MATH2471': {
-    id: 'MATH2471',
-    title: 'Calculus I',
-    code: 'MATH 2471',
-    credits: 4,
-    department: 'Mathematics',
-    prerequisites: [],
-    description: 'Limits, continuity, differentiation, integration and applications.',
-    gradeDistribution: { A: 20, B: 30, C: 30, D: 15, F: 5 }
-  }
-};
+  data: course
+}));
 
-const initialNodes = [
-  {
-    id: 'CS1428',
-    type: 'courseNode',
-    position: { x: 250, y: 100 },
-    data: csCourses['CS1428']
-  },
-  {
-    id: 'CS2308',
-    type: 'courseNode',
-    position: { x: 250, y: 250 },
-    data: csCourses['CS2308']
-  },
-  {
-    id: 'CS2318',
-    type: 'courseNode',
-    position: { x: 450, y: 250 },
-    data: csCourses['CS2318']
-  },
-  {
-    id: 'MATH2471',
-    type: 'courseNode',
-    position: { x: 50, y: 100 },
-    data: csCourses['MATH2471']
-  }
-];
-
-const initialEdges = [
-  {
-    id: 'CS1428-CS2308',
-    source: 'CS1428',
-    target: 'CS2308',
+const initialEdges = Object.values(csCourses).flatMap(course =>
+  course.prerequisites.map(prereq => ({
+    id: `${prereq}-${course.id}`,
+    source: prereq,
+    target: course.id,
     animated: true,
     style: { stroke: '#FF0000' }
-  },
-  {
-    id: 'CS2308-CS2318',
-    source: 'CS2308',
-    target: 'CS2318',
-    animated: true,
-    style: { stroke: '#FF0000' }
-  }
-];
+  }))
+);
 
 const nodeTypes = {
   courseNode: CourseNode
