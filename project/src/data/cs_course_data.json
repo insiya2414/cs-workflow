@@ -216,5 +216,158 @@
       "prerequisites": [],
       "description": "",
       "gradeDistribution": {}
-    }
+    },
+    "ENG1310": {
+      "id": "ENG1310",
+      "title": "College Writing I",
+      "code": "ENG 1310",
+      "credits": 3,
+      "department": "General Education",
+        "prerequisites": [],
+        "description": "Core Communication course."
+      },
+      "ENG1320": {
+        "id": "ENG1320",
+        "title": "College Writing II",
+        "code": "ENG 1320",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [
+          "ENG1310"
+        ],
+        "description": "Second course in College Writing."
+      },
+      "PHIL1305": {
+        "id": "PHIL1305",
+        "title": "Critical Thinking",
+        "code": "PHIL 1305",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [],
+        "description": "Introduction to logic and critical thinking.",
+        "gradeDistribution": {}
+      },
+      "PHIL1320": {
+        "id": "PHIL1320",
+        "title": "Ethics and Society",
+        "code": "PHIL 1320",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [],
+        "description": "Examination of ethical issues and social responsibility.",
+        "gradeDistribution": {}
+      },
+      "COMM1310": {
+        "id": "COMM1310",
+        "title": "Oral Communication",
+        "code": "COMM 1310",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [],
+        "description": "Basic principles of public speaking and communication.",
+        "gradeDistribution": {}
+      },
+      "POSI2310": {
+        "id": "POSI2310",
+        "title": "Government of Texas",
+        "code": "POSI 2310",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [],
+        "description": "Study of Texas government and politics.",
+        "gradeDistribution": {}
+      },
+      "POSI2320": {
+        "id": "POSI2320",
+        "title": "Federal Government",
+        "code": "POSI 2320",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [],
+        "description": "Study of U.S. federal government.",
+        "gradeDistribution": {}
+      },
+      "CS3190": {
+        "id": "CS3190",
+        "title": "Cooperative Education",
+        "code": "CS 3190",
+        "credits": 1,
+        "department": "Computer Science",
+        "prerequisites": [],
+        "description": "Professional experience in a real-world environment.",
+        "gradeDistribution": {}
+      },
+      "CS3290": {
+        "id": "CS3290",
+        "title": "Advanced Cooperative Education",
+        "code": "CS 3290",
+        "credits": 2,
+        "department": "Computer Science",
+        "prerequisites": [
+          "CS3190"
+        ],
+        "description": "Advanced practical training in a company setting."
+      },
+      "CS4100": {
+        "id": "CS4100",
+        "title": "Computer Science Internship",
+        "code": "CS 4100",
+        "credits": 1,
+        "department": "Computer Science",
+        "prerequisites": [],
+        "description": "Supervised internship in a CS-related position.",
+        "gradeDistribution": {}
+      },
+      "CS4298": {
+        "id": "CS4298",
+        "title": "Undergraduate Research I",
+        "code": "CS 4298",
+        "credits": 2,
+        "department": "Computer Science",
+        "prerequisites": [],
+        "description": "Faculty-supervised research project.",
+        "gradeDistribution": {}
+      },
+      "CS4299": {
+        "id": "CS4299",
+        "title": "Undergraduate Research II",
+        "code": "CS 4299",
+        "credits": 2,
+        "department": "Computer Science",
+        "prerequisites": [
+          "CS4298"
+        ],
+        "description": "Advanced undergraduate research."
+      },
+      "CS4395": {
+        "id": "CS4395",
+        "title": "Independent Study in Computer Science",
+        "code": "CS 4395",
+        "credits": 3,
+        "department": "Computer Science",
+        "prerequisites": [],
+        "description": "Independent research or study project.",
+        "gradeDistribution": {}
+      },
+      "HON4390B": {
+        "id": "HON4390B",
+        "title": "Honors Capstone",
+        "code": "HON 4390B",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [],
+        "description": "Capstone project for honors students (department approval required).",
+        "gradeDistribution": {}
+      },
+      "RES4399": {
+        "id": "RES4399",
+        "title": "Mentored Research and Creative Expression",
+        "code": "RES 4399",
+        "credits": 3,
+        "department": "General Education",
+        "prerequisites": [],
+        "description": "Faculty-mentored research project.",
+        "gradeDistribution": {}
+      }
+    
   }
