@@ -59,29 +59,62 @@ function App() {
     setSelectedCourse(csCourses[courseId]);
   }, []);
 
-  useEffect(() => {
-    const updatedNodes = Object.values(csCourses).map((course, index) => ({
-      id: course.id,
-      type: 'courseNode',
-      position: {
-        x: 200 + (index % 5) * 200,
-        y: 100 + Math.floor(index / 5) * 150
-      },
-      data: {
-        ...course,
-        completed: completedCourses.includes(course.id)
-      },
-      style: {
-        backgroundColor: completedCourses.includes(course.id) ? '#4ade80' : '#f9fafb', // ✅ solid fill
-        color: completedCourses.includes(course.id) ? '#1e3a1e' : '#111827',
-        borderRadius: '8px',
-        padding: '8px'
-      }
+  // useEffect(() => {
+  //   const updatedNodes = Object.values(csCourses).map((course, index) => ({
+  //     id: course.id,
+  //     type: 'courseNode',
+  //     position: {
+  //       x: 200 + (index % 5) * 200,
+  //       y: 100 + Math.floor(index / 5) * 150
+  //     },
+  //     data: {
+  //       ...course,
+  //       completed: completedCourses.includes(course.id)
+  //     },
+  //     style: {
+  //       backgroundColor: completedCourses.includes(course.id) ? '#4ade80' : '#f9fafb', // ✅ solid fill
+  //       color: completedCourses.includes(course.id) ? '#1e3a1e' : '#111827',
+  //       borderRadius: '8px',
+  //       padding: '8px'
+  //     }
       
-    }));
+  //   }));
 
+  //   setNodes(updatedNodes);
+  // }, [completedCourses]);
+  useEffect(() => {
+    const updatedNodes = Object.values(csCourses).map((course, index) => {
+      const prerequisitesMet = course.prerequisites.every(prereq =>
+        completedCourses.includes(prereq)
+      );
+  
+      return {
+        id: course.id,
+        type: 'courseNode',
+        position: {
+          x: 200 + (index % 5) * 200,
+          y: 100 + Math.floor(index / 5) * 150
+        },
+        data: {
+          ...course,
+          completed: completedCourses.includes(course.id),
+          prerequisitesMet  // ✅ pass this dynamically!
+        },
+        style: {
+          backgroundColor: completedCourses.includes(course.id)
+            ? '#bbf7d0'
+            : '#ffffff',
+          color: completedCourses.includes(course.id)
+            ? '#064e3b'
+            : '#1f2937',
+          transition: 'all 0.2s ease-in-out',
+        }
+      };
+    });
+  
     setNodes(updatedNodes);
   }, [completedCourses]);
+  
 
   const exportToPDF = useCallback(() => {
     console.log('Exporting to PDF...');
