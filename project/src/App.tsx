@@ -103,38 +103,62 @@ function App() {
   );
 
   useEffect(() => {
-    const updatedNodes = Object.values(csCourses).map((course, index) => {
-      const prerequisitesMet = course.prerequisites.every(prereq =>
-        completedCourses.includes(prereq)
-      );
-
-      return {
-        id: course.id,
-        type: 'courseNode',
-        position: {
-          x: 200 + (index % 5) * 200,
-          y: 100 + Math.floor(index / 5) * 150
-        },
-        data: {
-          ...course,
-          completed: completedCourses.includes(course.id),
-          prerequisitesMet
-        },
-        style: {
-          backgroundColor: completedCourses.includes(course.id)
-            ? '#bbf7d0'
-            : '#ffffff',
-          color: completedCourses.includes(course.id)
-            ? '#064e3b'
-            : '#1f2937',
-          transition: 'all 0.2s ease-in-out'
-        }
-      };
+    const levels = {
+      1000: [],
+      2000: [],
+      3000: [],
+      4000: [],
+      other: []
+    };
+  
+    Object.values(csCourses).forEach(course => {
+      const level = parseInt(course.code.match(/\d{4}/)?.[0] || '0', 10);
+  
+      if (level >= 1000 && level < 2000) levels[1000].push(course);
+      else if (level >= 2000 && level < 3000) levels[2000].push(course);
+      else if (level >= 3000 && level < 4000) levels[3000].push(course);
+      else if (level >= 4000) levels[4000].push(course);
+      else levels.other.push(course);
     });
-
+  
+    const spacingX = 270;
+    const spacingY = 260;
+    let updatedNodes: any[] = [];
+  
+    Object.entries(levels).forEach(([level, courses], rowIndex) => {
+      courses.forEach((course, colIndex) => {
+        const prerequisitesMet = course.prerequisites.every(prereq =>
+          completedCourses.includes(prereq)
+        );
+  
+        updatedNodes.push({
+          id: course.id,
+          type: 'courseNode',
+          position: {
+            x: colIndex * spacingX,
+            y: rowIndex * spacingY
+          },
+          data: {
+            ...course,
+            completed: completedCourses.includes(course.id),
+            prerequisitesMet
+          },
+          style: {
+            backgroundColor: completedCourses.includes(course.id)
+              ? '#bbf7d0'
+              : '#ffffff',
+            color: completedCourses.includes(course.id)
+              ? '#064e3b'
+              : '#1f2937',
+            transition: 'all 0.2s ease-in-out'
+          }
+        });
+      });
+    });
+  
     setNodes(updatedNodes);
   }, [completedCourses]);
-
+  
   const exportToPDF = useCallback(() => {
     console.log('Exporting to PDF...');
   }, []);
