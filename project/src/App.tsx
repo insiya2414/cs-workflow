@@ -40,12 +40,41 @@ function App() {
     0
   );
 
+  const creditsByType = {
+    cs: 0,
+    math: 0,
+    general: 0,
+    elective: 0
+  };
+  
+  completedCourses.forEach(id => {
+    const course = csCourses[id];
+    if (!course) return;
+  
+    const title = course.title.toLowerCase();
+  
+    // Elective check: anything with internship, research, co-op, or independent study
+    const isElective = /internship|cooperative|research|independent|elective/i.test(title);
+  
+    if (isElective) {
+      creditsByType.elective += course.credits;
+    } else if (course.department === 'Computer Science') {
+      creditsByType.cs += course.credits;
+    } else if (course.department === 'Mathematics') {
+      creditsByType.math += course.credits;
+    } else {
+      creditsByType.general += course.credits;
+    }
+  });
+  
   const requirements = [
-    { type: 'major', credits: 43, completed: totalCompletedCredits },
-    { type: 'math', credits: 14, completed: 0 },
-    { type: 'general', credits: 42, completed: 0 }
+    { type: 'computer science', credits: 43, completed: creditsByType.cs },
+    { type: 'math', credits: 14, completed: creditsByType.math },
+    { type: 'general', credits: 42, completed: creditsByType.general },
+    { type: 'elective', credits: 9, completed: creditsByType.elective } // You can adjust this total
   ];
-
+  
+  
   const onNodeClick = useCallback(
     (_, node) => {
       const courseId = node.id;
