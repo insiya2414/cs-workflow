@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import ReactFlow, {
   Background,
   Controls,
@@ -9,21 +9,10 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import csCourses from './data/cs_course_data.json';
 
-
 import { CourseNode } from './components/CourseNode';
 import { ProgressTracker } from './components/ProgressTracker';
 import { CourseDetails } from './components/CourseDetails';
-import { Download, ZoomIn, ZoomOut } from 'lucide-react';
-
-const initialNodes = Object.values(csCourses).map((course, index) => ({
-  id: course.id,
-  type: 'courseNode',
-  position: {
-    x: 200 + (index % 5) * 200,
-    y: 100 + Math.floor(index / 5) * 150
-  },
-  data: course
-}));
+import { Download } from 'lucide-react';
 
 const initialEdges = Object.values(csCourses).flatMap(course =>
   course.prerequisites.map(prereq => ({
@@ -40,19 +29,59 @@ const nodeTypes = {
 };
 
 function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [completedCourses, setCompletedCourses] = useState<string[]>([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const totalCompletedCredits = completedCourses.reduce(
+    (sum, id) => sum + (csCourses[id]?.credits || 0),
+    0
+  );
   
   const requirements = [
-    { type: 'major', credits: 43, completed: 0 },
+    { type: 'major', credits: 43, completed: totalCompletedCredits }, // ✅ dynamic now
     { type: 'math', credits: 14, completed: 0 },
     { type: 'general', credits: 42, completed: 0 }
   ];
 
+
   const onNodeClick = useCallback((_, node) => {
-    setSelectedCourse(csCourses[node.id]);
+    const courseId = node.id;
+
+    setCompletedCourses(prev => {
+      const isCompleted = prev.includes(courseId);
+      return isCompleted
+        ? prev.filter(id => id !== courseId)
+        : [...prev, courseId];
+    });
+
+    setSelectedCourse(csCourses[courseId]);
   }, []);
+
+  useEffect(() => {
+    const updatedNodes = Object.values(csCourses).map((course, index) => ({
+      id: course.id,
+      type: 'courseNode',
+      position: {
+        x: 200 + (index % 5) * 200,
+        y: 100 + Math.floor(index / 5) * 150
+      },
+      data: {
+        ...course,
+        completed: completedCourses.includes(course.id)
+      },
+      style: {
+        backgroundColor: completedCourses.includes(course.id) ? '#4ade80' : '#f9fafb', // ✅ solid fill
+        color: completedCourses.includes(course.id) ? '#1e3a1e' : '#111827',
+        borderRadius: '8px',
+        padding: '8px'
+      }
+      
+    }));
+
+    setNodes(updatedNodes);
+  }, [completedCourses]);
 
   const exportToPDF = useCallback(() => {
     console.log('Exporting to PDF...');
@@ -64,8 +93,9 @@ function App() {
         <ProgressTracker
           requirements={requirements}
           gpa={0.0}
+          completedCredits={totalCompletedCredits}
         />
-        
+
         <div className="mt-4 space-y-2">
           <button
             onClick={exportToPDF}
