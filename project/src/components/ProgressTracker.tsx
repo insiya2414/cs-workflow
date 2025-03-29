@@ -22,9 +22,11 @@ export function ProgressTracker({ requirements, gpa, completedCredits }: Progres
     <div key={req.type} className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          {req.type === 'major' && <GraduationCap className="text-blue-500" />}
-          {req.type === 'minor' && <Award className="text-purple-500" />}
-          {req.type === 'general' && <PieChart className="text-green-500" />}
+        {req.type === 'computer science' && <GraduationCap className="text-blue-500" />}
+        {req.type === 'math' && <Award className="text-purple-500" />}
+        {req.type === 'general' && <PieChart className="text-green-500" />}
+        {req.type === 'elective' && <PieChart className="text-yellow-500" />}
+
           <span className="font-medium capitalize">{req.type} Requirements</span>
         </div>
         <span className="text-sm text-gray-600">
@@ -46,7 +48,7 @@ export function ProgressTracker({ requirements, gpa, completedCredits }: Progres
         {/* ✅ New: Total Completed */}
         <div className="mt-4 flex items-center justify-between text-sm text-gray-700">
           <span>Total Completed Credits</span>
-          <span className="font-semibold text-gray-900">{completedCredits}</span>
+          <span className="font-semibold text-gray-900">{completedCredits}/120</span>
         </div>
 
         <div className="mt-6 pt-4 border-t">
