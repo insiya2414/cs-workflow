@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import ReactFlow, {
   Background,
   Controls,
@@ -38,56 +39,46 @@ function App() {
     (sum, id) => sum + (csCourses[id]?.credits || 0),
     0
   );
-  
+
   const requirements = [
-    { type: 'major', credits: 43, completed: totalCompletedCredits }, // ✅ dynamic now
+    { type: 'major', credits: 43, completed: totalCompletedCredits },
     { type: 'math', credits: 14, completed: 0 },
     { type: 'general', credits: 42, completed: 0 }
   ];
 
+  const onNodeClick = useCallback(
+    (_, node) => {
+      const courseId = node.id;
+      const course = csCourses[courseId];
 
-  const onNodeClick = useCallback((_, node) => {
-    const courseId = node.id;
+      const prerequisitesMet = course.prerequisites.every(prereq =>
+        completedCourses.includes(prereq)
+      );
 
-    setCompletedCourses(prev => {
-      const isCompleted = prev.includes(courseId);
-      return isCompleted
-        ? prev.filter(id => id !== courseId)
-        : [...prev, courseId];
-    });
+      if (!prerequisitesMet) {
+        toast.error(`Prerequisites not met for ${course.code}`, {
+          icon: '⚠️'
+        });
+        return;
+      }
 
-    setSelectedCourse(csCourses[courseId]);
-  }, []);
+      setCompletedCourses(prev =>
+        prev.includes(courseId)
+          ? prev.filter(id => id !== courseId)
+          : [...prev, courseId]
+      );
 
-  // useEffect(() => {
-  //   const updatedNodes = Object.values(csCourses).map((course, index) => ({
-  //     id: course.id,
-  //     type: 'courseNode',
-  //     position: {
-  //       x: 200 + (index % 5) * 200,
-  //       y: 100 + Math.floor(index / 5) * 150
-  //     },
-  //     data: {
-  //       ...course,
-  //       completed: completedCourses.includes(course.id)
-  //     },
-  //     style: {
-  //       backgroundColor: completedCourses.includes(course.id) ? '#4ade80' : '#f9fafb', // ✅ solid fill
-  //       color: completedCourses.includes(course.id) ? '#1e3a1e' : '#111827',
-  //       borderRadius: '8px',
-  //       padding: '8px'
-  //     }
-      
-  //   }));
+      setSelectedCourse(course);
+    },
+    [completedCourses]
+  );
 
-  //   setNodes(updatedNodes);
-  // }, [completedCourses]);
   useEffect(() => {
     const updatedNodes = Object.values(csCourses).map((course, index) => {
       const prerequisitesMet = course.prerequisites.every(prereq =>
         completedCourses.includes(prereq)
       );
-  
+
       return {
         id: course.id,
         type: 'courseNode',
@@ -98,7 +89,7 @@ function App() {
         data: {
           ...course,
           completed: completedCourses.includes(course.id),
-          prerequisitesMet  // ✅ pass this dynamically!
+          prerequisitesMet
         },
         style: {
           backgroundColor: completedCourses.includes(course.id)
@@ -107,14 +98,13 @@ function App() {
           color: completedCourses.includes(course.id)
             ? '#064e3b'
             : '#1f2937',
-          transition: 'all 0.2s ease-in-out',
+          transition: 'all 0.2s ease-in-out'
         }
       };
     });
-  
+
     setNodes(updatedNodes);
   }, [completedCourses]);
-  
 
   const exportToPDF = useCallback(() => {
     console.log('Exporting to PDF...');
@@ -164,6 +154,9 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* ✅ This is where Toaster goes */}
+      <Toaster position="top-right" />
     </div>
   );
 }
