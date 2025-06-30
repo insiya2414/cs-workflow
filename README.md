@@ -52,4 +52,4 @@ I created this project because I wanted to deepen my understanding of TypeScript
 3. **Build for production:**
      npm run build
 
-[Watch Demo Video](cs-workflow.mp4)
+[![Watch the demo](https://img.youtube.com/vi/Ao4-XxcYl_Y/maxresdefault.jpg)](https://youtu.be/Ao4-XxcYl_Y)
